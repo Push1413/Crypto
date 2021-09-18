@@ -1,4 +1,4 @@
-package com.example.crypto
+package com.example.crypto.presentation.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
