@@ -6,7 +6,7 @@ import com.example.crypto.domain.repository.CoinRepository
 import com.example.crypto.data.remote.dto.CoinDto
 import com.example.crypto.data.remote.dto.CoinDetailsDto
 
-class CoinRepositoryImp @Inject constructor(
+class CoinRepoObj @Inject constructor(
     private val api: CoinPaprikaApi
 ) : CoinRepository {
 

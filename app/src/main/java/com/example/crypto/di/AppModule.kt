@@ -2,6 +2,7 @@ package com.example.crypto.di
 
 import com.example.crypto.common.Constants
 import com.example.crypto.data.remote.CoinPaprikaApi
+import com.example.crypto.data.repository.CoinRepoObj
 import com.example.crypto.domain.repository.CoinRepository
 import dagger.Module
 import dagger.Provides
@@ -10,7 +11,6 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import com.example.crypto.data.repository.CoinRepositoryImp
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,6 +29,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideCoinRepository(api: CoinPaprikaApi): CoinRepository {
-        return CoinRepositoryImp(api)
+        return CoinRepoObj(api)
     }
 }

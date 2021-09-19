@@ -9,44 +9,41 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.crypto.presentation.Screens
+import com.example.crypto.presentation.coin_details.CoinDetailScreen
+import com.example.crypto.presentation.coin_list.CoinListScreen
 import com.example.crypto.presentation.theme.CryptoTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CryptoTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screens.CoinListScreen.route
+                    ) {
+                        composable(
+                            route = Screens.CoinListScreen.route
+                        ) {
+                            CoinListScreen(navController)
+                        }
+                        composable(
+                            route = Screens.CoinDetailScreen.route + "/{coinId}"
+                        ) {
+                            CoinDetailScreen()
+                        }
+                    }
+
                 }
             }
         }
     }
 }
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(
-    name = "Night Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Preview(
-    name = "Day Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-)
-@Composable
-private fun DefaultPreview() {
-
-}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    CryptoTheme {
-//        Greeting("Android")
-//    }
-//}
